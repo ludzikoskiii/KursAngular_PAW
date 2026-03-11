@@ -1,0 +1,50 @@
+<table>
+    <tbody>
+        <tr>
+            <td>
+                <span> {{nazwaKursu}}</span>
+                
+            </td>
+             <td>
+                <strong> {{nazwaKursu}}</strong>
+                <!-- interpolacja - technika wiązania danych (data binding), która pozwala osadzać wartości ze skryptu komponentu (TypeScript) bezpośrednio w szablonie HTML. -->
+            </td>
+            <!-- <td>
+                <strong> {{courseName}}</strong>
+                
+            </td> -->
+        </tr>
+        <tr>
+            <td>
+                <input type="text" [value]="nazwaKursu">
+                <!-- wiazanie wartosci umozliwia przekazanie swojej zmiennej do np.wartosci wlasnie takiego inputa -->
+            </td>
+            <td>
+              <p [class]="stylAkapitu"> To jest akapit</p> 
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button (click)="showWelcomeMessage()">Pokaz wiadomosc</button>
+            </td>
+            <!-- SPOSOB PISANIA INNY ACZKOLWIEK LOGIKA TA SAMA -->
+            <td>
+                <select (change)="onStateChanged()">
+                    <option >Kacwin</option>
+                    <option >Niedzica</option>
+                   
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="text" [(ngModel)]="nazwaKursu">
+            
+            </td>
+                 <!-- DWUKIERUNKOWE POWIAZANIE DANYCH -->
+             <td>
+                <button (click)="changeCourseName('Java')">Zmiana nazwy kursu</button>
+             </td>
+        </tr>
+    </tbody>
+</table>
