@@ -1,0 +1,62 @@
+<div class="container mt-4">
+  <h2>Lekcja 4 - Control Flow (&#64;if, &#64;else, &#64;for)</h2>
+  <hr>
+
+  <h5>&#64;if / &#64;else</h5>
+
+  <!-- @if sprawdza warunek; @else wskazuje na blok alternatywny -->
+  @if (jestZalogowany) {
+    <div class="alert alert-success">Jestes zalogowany!</div>
+  } @else {
+    <div class="alert alert-warning">Nie jestes zalogowany</div>
+  }
+
+  <button class="btn btn-primary mb-3" (click)="przelaczLogin()">
+    Przelacz status logowania
+  </button>
+
+  <hr>
+
+  <h5>&#64;if z wieloma warunkami - ocena: {{ ocena }}</h5>
+
+  @if (ocena >= 90) {
+    <p class="text-success">Celujacy</p>
+  } @else if (ocena >= 75) {
+    <p class="text-primary">Bardzo dobry</p>
+  } @else if (ocena >= 60) {
+    <p class="text-warning">Dobry</p>
+  } @else {
+    <p class="text-danger">Niedostateczny</p>
+  }
+
+  <hr>
+
+  <h5>&#64;for - lista produktow</h5>
+
+  <!-- track mowi Angularowi po czym identyfikowac elementy (optymalizacja) -->
+  <table class="table table-striped">
+    <thead>
+      <tr><th>#</th><th>Nazwa</th><th>Cena</th><th>Indeks</th></tr>
+    </thead>
+    <tbody>
+      @for (produkt of produkty; track produkt.id; let i = $index) {
+        <!-- $index - aktualny indeks iteracji (0, 1, 2...) -->
+        <tr>
+          <td>{{ produkt.id }}</td>
+          <td>{{ produkt.nazwa }}</td>
+          <td>{{ produkt.cena }} zl</td>
+          <td>{{ i }}</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+
+  <h5>&#64;empty - pusta lista</h5>
+
+  <!-- @empty wyswietla sie automatycznie gdy tablica jest pusta -->
+  @for (item of pustaLista; track item) {
+    <p>{{ item }}</p>
+  } @empty {
+    <div class="alert alert-secondary">Lista jest pusta</div>
+  }
+</div>
