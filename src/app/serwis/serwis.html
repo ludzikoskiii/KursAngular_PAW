@@ -1,0 +1,47 @@
+<div class="container mt-4">
+  <h2>⚙️ Lekcja 11 – Serwisy w Angular (Dependency Injection)</h2>
+  <hr>
+
+  <div class="alert alert-info">
+    <strong>💡 Po co serwis?</strong><br>
+    Serwis wydziela logikę (np. pobieranie danych z API) z komponentu.<br>
+    Wiele komponentów może używać tego samego serwisu – <strong>DRY principle</strong> (Don't Repeat Yourself).
+  </div>
+
+  @if (ladowanie) {
+    <div class="spinner-border"></div>
+  }
+
+  <!-- Lista postów pobranych przez serwis -->
+  <div class="row">
+    <div class="col-md-6">
+      <h5>Posty (przez PostService)</h5>
+      @for (post of posty; track post.id) {
+        <div class="card mb-2">
+          <div class="card-body p-2">
+            <strong>#{{ post.id }}</strong> {{ post.title }}
+            <!-- Wywołujemy metodę serwisu przez metodę komponentu -->
+            <button class="btn btn-sm btn-outline-primary float-end"
+                    (click)="pobierzJeden(post.id!)">
+              Szczegóły
+            </button>
+          </div>
+        </div>
+      }
+    </div>
+
+    <!-- Szczegóły wybranego posta -->
+    <div class="col-md-6">
+      @if (wybranyPost) {
+        <h5>Szczegóły posta #{{ wybranyPost.id }}</h5>
+        <div class="card">
+          <div class="card-body">
+            <h6>{{ wybranyPost.title }}</h6>
+            <p>{{ wybranyPost.body }}</p>
+            <small class="text-muted">User ID: {{ wybranyPost.userId }}</small>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</div>
