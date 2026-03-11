@@ -1,0 +1,40 @@
+<div class="container mt-4">
+  <h2>📤 Lekcja 8 – POST API Integration</h2>
+  <hr>
+
+  <p class="text-muted">Wysyłamy nowy post do fake API (jsonplaceholder)</p>
+
+  <form (ngSubmit)="wyslijPost()">
+    <div class="mb-3">
+      <label class="form-label">Tytuł posta</label>
+      <!-- [(ngModel)] two-way binding z obiektem nowyPost -->
+      <input class="form-control" type="text" name="title"
+             [(ngModel)]="nowyPost.title" required placeholder="Wpisz tytuł">
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Treść</label>
+      <textarea class="form-control" name="body"
+                [(ngModel)]="nowyPost.body" required rows="4"
+                placeholder="Wpisz treść posta"></textarea>
+    </div>
+
+    <button class="btn btn-success" type="submit" [disabled]="ladowanie || !nowyPost.title">
+      @if (ladowanie) { ⏳ Wysyłanie... } @else { 📤 Wyślij POST }
+    </button>
+  </form>
+
+  <!-- Błąd -->
+  @if (blad) {
+    <div class="alert alert-danger mt-3">{{ blad }}</div>
+  }
+
+  <!-- Odpowiedź serwera -->
+  @if (odpowiedz) {
+    <div class="alert alert-success mt-3">
+      <strong>✅ Post utworzony!</strong><br>
+      ID nadane przez serwer: <strong>{{ odpowiedz.id }}</strong><br>
+      Tytuł: {{ odpowiedz.title }}
+    </div>
+  }
+</div>
