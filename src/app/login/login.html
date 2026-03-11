@@ -1,0 +1,59 @@
+<div class="container mt-4">
+  <h2>🔐 Lekcja 13/14 – Login + Auth Guard</h2>
+  <hr>
+
+  @if (!zalogowany) {
+    <!-- ===== FORMULARZ LOGOWANIA ===== -->
+    <div class="row justify-content-center">
+      <div class="col-md-5">
+        <div class="card">
+          <div class="card-header bg-dark text-white">
+            <h5 class="mb-0">Zaloguj się</h5>
+          </div>
+          <div class="card-body">
+            <p class="text-muted small">
+              Demo: użyj <code>emilys / emilyspass</code> (dummyjson.com)
+            </p>
+
+            <form [formGroup]="loginForm" (ngSubmit)="zaloguj()">
+              <div class="mb-3">
+                <label class="form-label">Login</label>
+                <input class="form-control" formControlName="username" type="text">
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label">Hasło</label>
+                <input class="form-control" formControlName="password" type="password">
+              </div>
+
+              @if (blad) {
+                <div class="alert alert-danger">{{ blad }}</div>
+              }
+
+              <button class="btn btn-primary w-100" type="submit"
+                      [disabled]="loginForm.invalid || ladowanie">
+                @if (ladowanie) { ⏳ Logowanie... } @else { 🔐 Zaloguj }
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  } @else {
+    <!-- ===== PANEL PO ZALOGOWANIU ===== -->
+    <div class="alert alert-success">
+      <h5>✅ Zalogowano pomyślnie!</h5>
+      <p>Użytkownik: <strong>{{ uzytkownik?.firstName }} {{ uzytkownik?.lastName }}</strong></p>
+      <p>Email: {{ uzytkownik?.email }}</p>
+      <p class="small text-muted">Token JWT zapisany w localStorage</p>
+    </div>
+
+    <div class="alert alert-info">
+      <strong>🛡️ Auth Guard</strong><br>
+      Guard (auth.guard.ts) chroni trasy przed niezalogowanymi użytkownikami.<br>
+      Dodaj <code>canActivate: [authGuard]</code> do trasy w app.routes.ts.
+    </div>
+
+    <button class="btn btn-danger" (click)="wyloguj()">🚪 Wyloguj</button>
+  }
+</div>
