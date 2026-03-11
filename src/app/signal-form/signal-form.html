@@ -1,0 +1,69 @@
+<div class="container mt-4">
+  <h2>📋 Lekcja 12 – Signal Form + Walidacja</h2>
+  <hr>
+
+  <div class="alert alert-info">
+    <strong>💡 Signal Form vs Reactive Form:</strong><br>
+    Signal Form używa sygnałów Angulara zamiast FormControl.<br>
+    Walidacja jest reaktywna – computed() przelicza się automatycznie.
+  </div>
+
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+
+      <div class="mb-3">
+        <label class="form-label">Imię</label>
+        <!-- Używamy (ngModelChange) zamiast [(ngModel)] żeby aktualizować signal -->
+        <input class="form-control"
+               [class.is-invalid]="imieBlad()"
+               [class.is-valid]="proba() && !imieBlad() && imie()"
+               type="text"
+               [value]="imie()"
+               (input)="imie.set($any($event.target).value)"
+               placeholder="Twoje imię">
+        @if (imieBlad()) {
+          <div class="invalid-feedback">{{ imieBlad() }}</div>
+        }
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Email</label>
+        <input class="form-control"
+               [class.is-invalid]="emailBlad()"
+               [class.is-valid]="proba() && !emailBlad() && email()"
+               type="email"
+               [value]="email()"
+               (input)="email.set($any($event.target).value)"
+               placeholder="twoj@email.pl">
+        @if (emailBlad()) {
+          <div class="invalid-feedback">{{ emailBlad() }}</div>
+        }
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Hasło</label>
+        <input class="form-control"
+               [class.is-invalid]="hasloBlad()"
+               [class.is-valid]="proba() && !hasloBlad() && haslo()"
+               type="password"
+               [value]="haslo()"
+               (input)="haslo.set($any($event.target).value)"
+               placeholder="Min. 6 znaków">
+        @if (hasloBlad()) {
+          <div class="invalid-feedback">{{ hasloBlad() }}</div>
+        }
+      </div>
+
+      <button class="btn btn-primary w-100" (click)="wyslij()">
+        📤 Wyślij formularz
+      </button>
+
+      <!-- Status formularza -->
+      <div class="mt-2 text-center small">
+        Status: <strong [class.text-success]="czyPoprawny()" [class.text-danger]="!czyPoprawny()">
+          {{ czyPoprawny() ? '✅ Poprawny' : '❌ Niepoprawny' }}
+        </strong>
+      </div>
+    </div>
+  </div>
+</div>
