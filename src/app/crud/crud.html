@@ -1,0 +1,70 @@
+<div class="container mt-4">
+  <h2>🗃️ Lekcja 10 – Pełne CRUD z Reactive Form</h2>
+  <hr>
+
+  <div class="row">
+    <!-- ===== FORMULARZ ===== -->
+    <div class="col-md-4">
+      <h5>{{ tryb === 'dodaj' ? '➕ Nowy post' : '✏️ Edycja posta #' + edytowanyId }}</h5>
+
+      <form [formGroup]="postForm" (ngSubmit)="zapisz()">
+        <div class="mb-3">
+          <label class="form-label">Tytuł</label>
+          <input class="form-control" formControlName="title"
+                 [class.is-invalid]="title?.invalid && title?.touched">
+          @if (title?.errors?.['required'] && title?.touched) {
+            <div class="invalid-feedback">Tytuł wymagany</div>
+          }
+          @if (title?.errors?.['minlength'] && title?.touched) {
+            <div class="invalid-feedback">Min. 5 znaków</div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Treść</label>
+          <textarea class="form-control" formControlName="body" rows="4"
+                    [class.is-invalid]="body?.invalid && body?.touched"></textarea>
+          @if (body?.invalid && body?.touched) {
+            <div class="invalid-feedback">Treść wymagana</div>
+          }
+        </div>
+
+        <!-- Przyciski zależne od trybu -->
+        <button class="btn btn-success me-2" type="submit" [disabled]="postForm.invalid">
+          {{ tryb === 'dodaj' ? '➕ Dodaj' : '💾 Zapisz' }}
+        </button>
+        @if (tryb === 'edytuj') {
+          <button class="btn btn-secondary" type="button" (click)="resetForm()">Anuluj</button>
+        }
+      </form>
+    </div>
+
+    <!-- ===== LISTA ===== -->
+    <div class="col-md-8">
+      @if (komunikat) {
+        <div class="alert alert-success">{{ komunikat }}</div>
+      }
+
+      <h5>Lista postów</h5>
+      <table class="table table-sm table-hover">
+        <thead class="table-dark">
+          <tr><th>ID</th><th>Tytuł</th><th>Akcje</th></tr>
+        </thead>
+        <tbody>
+          @for (post of posty; track post.id) {
+            <tr>
+              <td>{{ post.id }}</td>
+              <td>{{ post.title | slice:0:40 }}...</td>
+              <td>
+                <!-- Edycja – wczytuje dane do formularza -->
+                <button class="btn btn-sm btn-warning me-1" (click)="edytuj(post)">✏️</button>
+                <!-- Usunięcie -->
+                <button class="btn btn-sm btn-danger" (click)="usun(post.id!)">🗑️</button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
