@@ -1,0 +1,96 @@
+<div class="container mt-4">
+  <h2>🔄 Lekcja 16 – Component Lifecycle & Pipes</h2>
+  <hr>
+
+  <!-- ===== LIFECYCLE HOOKS ===== -->
+  <h4>1. Cykl życia komponentu (Lifecycle Hooks)</h4>
+  <div class="alert alert-secondary small">
+    <strong>Kolejność hooków:</strong><br>
+    1. <code>ngOnChanges</code> – zmiana &#64;Input()<br>
+    2. <code>ngOnInit</code> – inicjalizacja komponentu<br>
+    3. <code>ngAfterViewInit</code> – DOM wyrenderowany<br>
+    4. <code>ngOnDestroy</code> – komponent usuwany
+    <br><strong>👉 Otwórz konsolę przeglądarki (F12) żeby zobaczyć logi!</strong>
+  </div>
+
+  <button class="btn btn-outline-danger me-2 mb-3"
+          (click)="pokazDziecko.set(!pokazDziecko())">
+    {{ pokazDziecko() ? '🗑️ Zniszcz dziecko (ngOnDestroy)' : '🌱 Utwórz dziecko (ngOnInit)' }}
+  </button>
+
+  <button class="btn btn-outline-primary mb-3" (click)="zmienWartosc()">
+    🔄 Zmień &#64;Input() (ngOnChanges)
+  </button>
+
+  @if (pokazDziecko()) {
+    <!-- Przekazujemy wartość przez &#64;Input() – nawiasy kwadratowe [wartoscOdRodzica] -->
+    <app-dziecko [wartoscOdRodzica]="wartoscDlaDziecka()"></app-dziecko>
+  }
+
+  <hr>
+
+  <!-- ===== PIPES ===== -->
+  <h4>2. Pipes (rury transformujące dane)</h4>
+  <p class="text-muted">Pipe <code>|</code> transformuje wartość w szablonie bez zmiany oryginału</p>
+
+  <table class="table table-bordered">
+    <thead class="table-dark">
+      <tr><th>Pipe</th><th>Przykład</th><th>Wynik</th></tr>
+    </thead>
+    <tbody>
+      <!-- uppercase / lowercase – zamiana liter -->
+      <tr>
+        <td><code>uppercase</code></td>
+        <td><code>{{ "'" }}{{ tekst }}{{ "'" }} | uppercase</code></td>
+        <td><strong>{{ tekst | uppercase }}</strong></td>
+      </tr>
+      <tr>
+        <td><code>lowercase</code></td>
+        <td><code>| lowercase</code></td>
+        <td><strong>{{ tekst | lowercase }}</strong></td>
+      </tr>
+
+      <!-- currency – formatowanie waluty -->
+      <tr>
+        <td><code>currency</code></td>
+        <td><code>{{ cena }} | currency:'PLN'</code></td>
+        <td><strong>{{ cena | currency:'PLN' }}</strong></td>
+      </tr>
+
+      <!-- date – formatowanie daty -->
+      <tr>
+        <td><code>date</code></td>
+        <td><code>data | date:'dd.MM.yyyy HH:mm'</code></td>
+        <td><strong>{{ data | date:'dd.MM.yyyy HH:mm' }}</strong></td>
+      </tr>
+
+      <!-- decimal – formatowanie liczby (min.max cyfr) -->
+      <tr>
+        <td><code>number</code></td>
+        <td><code>{{ liczba }} | number:'1.2-3'</code></td>
+        <td><strong>{{ liczba | number:'1.2-3' }}</strong></td>
+      </tr>
+
+      <!-- percent – liczba jako procent -->
+      <tr>
+        <td><code>percent</code></td>
+        <td><code>{{ procent }} | percent</code></td>
+        <td><strong>{{ procent | percent }}</strong></td>
+      </tr>
+
+      <!-- slice – wycinek tablicy lub stringa -->
+      <tr>
+        <td><code>slice</code></td>
+        <td><code>dlugaTablica | slice:0:3</code></td>
+        <td><strong>{{ dlugaTablica | slice:0:3 }}</strong></td>
+      </tr>
+
+      <!-- json – wyświetl obiekt jako JSON (przydatne do debugowania) -->
+      <tr>
+        <td><code>json</code></td>
+        <td><code>obiekt | json</code></td>
+        <td><code>{{ obiekt | json }}</code></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
