@@ -1,0 +1,64 @@
+<div class="container mt-4">
+  <h2>📦 Lekcja 1 – Zmienne w Angular/TypeScript</h2>
+  <hr>
+
+  <!-- STRING: wyświetlamy zmienną tekstową przez interpolację {{ }} -->
+  <h5>🔤 String</h5>
+  <p>Nazwa kursu: <strong>{{ nazwaKursu }}</strong></p>
+  <p>Wersja: <strong>{{ wersjaKursu }}</strong></p>
+
+  <!-- NUMBER: liczby całkowite i zmiennoprzecinkowe -->
+  <h5>🔢 Number</h5>
+  <p>Numer: <strong>{{ no }}</strong></p>
+  <p>Cena produktu: <strong>{{ cenaProdutu }} zł</strong></p>
+
+  <!-- BOOLEAN: prawda / fałsz -->
+  <h5>✅ Boolean</h5>
+  <p>Jest aktywny: <strong>{{ jestAktywny }}</strong></p>
+  <p>Jest obecny: <strong>{{ jestObecny }}</strong></p>
+
+  <!-- DATE: obiekt daty -->
+  <h5>📅 Date</h5>
+  <p>Obecna data: <strong>{{ obecnaData }}</strong></p>
+
+  <!-- ARRAY OF STRINGS: tablica tekstów -->
+  <h5>📋 Tablica stringów</h5>
+  <ul>
+    @for (miasto of listaMiast; track miasto) {
+      <li>{{ miasto }}</li>
+    }
+  </ul>
+
+  <!-- ARRAY OF NUMBERS: tablica liczb -->
+  <h5>🔢 Tablica liczb</h5>
+  <ul>
+    @for (num of noAray; track num) {
+      <li>{{ num }}</li>
+    }
+  </ul>
+
+  <!-- OBJECT: obiekt z właściwościami -->
+  <h5>🧑 Obiekt ucznia</h5>
+  <p>Imię: {{ uczenObj.imie }}</p>
+  <p>Numer: {{ uczenObj.numer }}</p>
+  <p>Email: {{ uczenObj.email }}</p>
+
+  <!-- ARRAY OF OBJECTS: tablica obiektów -->
+  <h5>👥 Lista uczniów</h5>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Imię</th>
+        <th>Miasto</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (uczen of uczenList; track uczen.imie) {
+        <tr>
+          <td>{{ uczen.imie }}</td>
+          <td>{{ uczen.miasto }}</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>

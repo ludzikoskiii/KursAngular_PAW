@@ -1,0 +1,121 @@
+<div class="container-fluid">
+  <div class="row">
+
+    <!-- ===== SIDEBAR (nawigacja boczna) ===== -->
+    <nav class="col-md-3 col-lg-2 d-md-block bg-dark sidebar collapse min-vh-100">
+      <div class="position-sticky pt-3">
+        <h5 class="text-white text-center mb-4">🅰 Angular 21 Kurs</h5>
+
+        <ul class="nav flex-column">
+
+          <!-- Lekcja 1 -->
+          <li class="nav-item">
+            <a class="nav-link text-white" routerLink="zmienne" routerLinkActive="active">
+              📦 Zmienne (Part 1)
+            </a>
+          </li>
+
+          <!-- Lekcja 2 -->
+          <li class="nav-item">
+            <a class="nav-link text-white" routerLink="databinding" routerLinkActive="active">
+              🔗 Data Binding (Part 2)
+            </a>
+          </li>
+
+          <!-- Lekcja 3 -->
+          <li class="nav-item">
+            <a class="nav-link text-white" routerLink="signal" routerLinkActive="active">
+              📡 Signal & Routing (Part 3)
+            </a>
+          </li>
+
+          <!-- Lekcja 4 -->
+          <li class="nav-item">
+            <a class="nav-link text-white" routerLink="control-flow" routerLinkActive="active">
+              🔀 Control Flow (Part 4)
+            </a>
+          </li>
+
+          <!-- Lekcja 5 -->
+          <li class="nav-item">
+            <a class="nav-link text-white" routerLink="ng-class-style" routerLinkActive="active">
+              🎨 ngClass & ngStyle (Part 5)
+            </a>
+          </li>
+
+          <!-- Lekcja 6 -->
+          <li class="nav-item">
+            <a class="nav-link text-white" routerLink="forms" routerLinkActive="active">
+              📝 Formularze (Part 6)
+            </a>
+          </li>
+
+          <!-- Lekcja 7 -->
+          <li class="nav-item">
+            <a class="nav-link text-white" routerLink="api-get" routerLinkActive="active">
+              📥 GET API (Part 7)
+            </a>
+          </li>
+
+          <!-- Lekcja 8 -->
+          <li class="nav-item">
+            <a class="nav-link text-white" routerLink="api-post" routerLinkActive="active">
+              📤 POST API (Part 8)
+            </a>
+          </li>
+
+          <!-- Lekcja 9 -->
+          <li class="nav-item">
+            <a class="nav-link text-white" routerLink="api-put-delete" routerLinkActive="active">
+              ✏️ PUT & DELETE (Part 9)
+            </a>
+          </li>
+
+          <!-- Lekcja 10 -->
+          <li class="nav-item">
+            <a class="nav-link text-white" routerLink="crud" routerLinkActive="active">
+              🗃️ CRUD (Part 10)
+            </a>
+          </li>
+
+          <!-- Lekcja 11 -->
+          <li class="nav-item">
+            <a class="nav-link text-white" routerLink="serwis" routerLinkActive="active">
+              ⚙️ Serwisy (Part 11)
+            </a>
+          </li>
+
+          <!-- Lekcja 12 -->
+          <li class="nav-item">
+            <a class="nav-link text-white" routerLink="signal-form" routerLinkActive="active">
+              📋 Signal Form (Part 12)
+            </a>
+          </li>
+
+          <!-- Lekcja 13/14 -->
+          <li class="nav-item">
+            <a class="nav-link text-white" routerLink="login" routerLinkActive="active">
+              🔐 Login + Guard (Part 13-14)
+            </a>
+          </li>
+
+          <!-- Lekcja 16 -->
+          <li class="nav-item">
+            <a class="nav-link text-white" routerLink="lifecycle-pipes" routerLinkActive="active">
+              🔄 Lifecycle & Pipes (Part 16)
+            </a>
+          </li>
+
+        </ul>
+      </div>
+    </nav>
+
+    <!-- ===== GŁÓWNA TREŚĆ - tutaj ładują się komponenty z routera ===== -->
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+      <div class="pt-4">
+        <router-outlet></router-outlet>
+      </div>
+    </main>
+
+  </div>
+</div>
