@@ -1,0 +1,50 @@
+<div class="container mt-4">
+  <h2>✏️ Lekcja 9 – PUT & DELETE API</h2>
+  <hr>
+
+  <div class="row">
+    <div class="col-md-6">
+
+      <h5>Edycja posta</h5>
+
+      <div class="mb-3">
+        <label class="form-label">ID posta</label>
+        <!-- Zmieniamy ID żeby PUT/DELETE trafił na właściwy zasób -->
+        <input class="form-control" type="number" name="id" [(ngModel)]="post.id">
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Tytuł</label>
+        <input class="form-control" type="text" name="title" [(ngModel)]="post.title">
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Treść</label>
+        <textarea class="form-control" name="body" [(ngModel)]="post.body" rows="3"></textarea>
+      </div>
+
+      <!-- PUT – aktualizacja -->
+      <button class="btn btn-warning me-2" (click)="aktualizuj()" [disabled]="ladowanie">
+        ✏️ PUT – Aktualizuj
+      </button>
+
+      <!-- DELETE – usunięcie -->
+      <button class="btn btn-danger" (click)="usun()" [disabled]="ladowanie">
+        🗑️ DELETE – Usuń
+      </button>
+    </div>
+
+    <div class="col-md-6">
+      <h5>Podgląd wysyłanych danych (JSON)</h5>
+      <!-- Pokazujemy co aktualnie wyślemy -->
+      <pre class="bg-dark text-white p-3 rounded">{{ post | json }}</pre>
+
+      <!-- Komunikat po operacji -->
+      @if (komunikat) {
+        <div class="alert mt-3" [ngClass]="'alert-' + typKomunikatu">
+          {{ komunikat }}
+        </div>
+      }
+    </div>
+  </div>
+</div>
