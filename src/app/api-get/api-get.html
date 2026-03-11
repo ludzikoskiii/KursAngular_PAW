@@ -1,0 +1,39 @@
+<div class="container mt-4">
+  <h2>📥 Lekcja 7 – GET API Integration</h2>
+  <hr>
+
+  <p class="text-muted">Pobieramy dane z <code>jsonplaceholder.typicode.com</code> – darmowe fake API</p>
+
+  <button class="btn btn-primary mb-3" (click)="pobierzPosty()" [disabled]="ladowanie">
+    @if (ladowanie) { ⏳ Ładowanie... } @else { 🔄 Odśwież dane }
+  </button>
+
+  <!-- Wyświetlamy błąd jeśli wystąpił -->
+  @if (blad) {
+    <div class="alert alert-danger">{{ blad }}</div>
+  }
+
+  <!-- Spinner ładowania -->
+  @if (ladowanie) {
+    <div class="text-center">
+      <div class="spinner-border" role="status"></div>
+    </div>
+  }
+
+  <!-- Wyświetlamy pobrane posty -->
+  @for (post of posty; track post.id) {
+    <div class="card mb-3">
+      <div class="card-header">
+        <strong>#{{ post.id }}</strong> – {{ post.title }}
+      </div>
+      <div class="card-body">
+        <p class="card-text">{{ post.body }}</p>
+        <small class="text-muted">User ID: {{ post.userId }}</small>
+      </div>
+    </div>
+  }
+
+  @if (posty.length === 0 && !ladowanie && !blad) {
+    <div class="alert alert-info">Brak danych – kliknij "Odśwież"</div>
+  }
+</div>
