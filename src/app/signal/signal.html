@@ -1,0 +1,27 @@
+<div class="container mt-4">
+  <h2>📡 Lekcja 3 – Signal w Angular</h2>
+  <hr>
+
+  <!-- Odczyt signala wymaga wywołania go jak funkcji: licznik() -->
+  <h5>Licznik: {{ licznik() }}</h5>
+  <h5>Podwojona wartość (computed): {{ podwojonaWartosc() }}</h5>
+
+  <!-- Przyciski zmieniające wartość signala -->
+  <button class="btn btn-success me-2" (click)="zwieksz()">➕ Zwiększ</button>
+  <button class="btn btn-danger me-2" (click)="zmniejsz()">➖ Zmniejsz</button>
+  <button class="btn btn-secondary" (click)="resetuj()">🔄 Resetuj</button>
+
+  <hr>
+
+  <!-- Signal tekstowy -->
+  <h5>Imię: {{ imie() }}</h5>
+  <button class="btn btn-primary me-2" (click)="zmienImie('Anna')">Ustaw Anna</button>
+  <button class="btn btn-primary" (click)="zmienImie('Piotr')">Ustaw Piotr</button>
+
+  <hr>
+  <div class="alert alert-info">
+    <strong>💡 Różnica signal vs zwykła zmienna:</strong><br>
+    Zwykła zmienna: Angular sprawdza zmiany przez całe drzewo komponentów (Zone.js)<br>
+    Signal: Angular wie dokładnie co się zmieniło – bardziej wydajne
+  </div>
+</div>
