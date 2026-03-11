@@ -1,0 +1,102 @@
+<div class="container mt-4">
+  <h2>📝 Lekcja 6 – Template Form & Reactive Form</h2>
+  <hr>
+
+  <!-- ============================= -->
+  <!-- TEMPLATE FORM (prosty sposób) -->
+  <!-- ============================= -->
+  <h4>1. Template Form</h4>
+  <p class="text-muted">Dane formularza wiążemy z obiektem przez [(ngModel)]</p>
+
+  <!-- #myForm="ngForm" tworzy referencję do formularza -->
+  <form #myForm="ngForm" (ngSubmit)="onTemplateFormSubmit()">
+
+    <div class="mb-3">
+      <label class="form-label">Imię</label>
+      <!-- [(ngModel)] = two-way binding; name= wymagany atrybut dla Template Form -->
+      <!-- required, minlength = wbudowane walidatory HTML5 obsługiwane przez Angular -->
+      <input class="form-control"
+             type="text"
+             name="imie"
+             [(ngModel)]="templateFormData.imie"
+             required
+             minlength="3"
+             #imieRef="ngModel">
+
+      <!-- Błąd wyświetlamy gdy pole było dotknięte (touched) i jest błędne (invalid) -->
+      @if (imieRef.invalid && imieRef.touched) {
+        <div class="text-danger small">Imię jest wymagane (min. 3 znaki)</div>
+      }
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Email</label>
+      <input class="form-control"
+             type="email"
+             name="email"
+             [(ngModel)]="templateFormData.email"
+             required
+             email
+             #emailRef="ngModel">
+
+      @if (emailRef.invalid && emailRef.touched) {
+        <div class="text-danger small">Podaj poprawny adres email</div>
+      }
+    </div>
+
+    <!-- disabled gdy cały formularz jest niepoprawny -->
+    <button class="btn btn-primary" type="submit" [disabled]="myForm.invalid">
+      Wyślij (Template Form)
+    </button>
+  </form>
+
+  <hr>
+
+  <!-- ================================= -->
+  <!-- REACTIVE FORM (zaawansowany sposób) -->
+  <!-- ================================= -->
+  <h4>2. Reactive Form</h4>
+  <p class="text-muted">Formularz definiujemy w TypeScript przez FormGroup i FormControl</p>
+
+  <!-- [formGroup] wiąże HTML-formularz z naszym obiektem FormGroup z TS -->
+  <form [formGroup]="reactiveForm" (ngSubmit)="onReactiveFormSubmit()">
+
+    <div class="mb-3">
+      <label class="form-label">Imię</label>
+      <!-- formControlName musi być zgodny z kluczem w FormGroup -->
+      <input class="form-control" type="text" formControlName="imie">
+
+      <!-- touched: użytkownik kliknął i wyszedł z pola; invalid: walidacja nie przeszła -->
+      @if (imie?.invalid && imie?.touched) {
+        @if (imie?.errors?.['required']) {
+          <div class="text-danger small">Imię jest wymagane</div>
+        }
+        @if (imie?.errors?.['minlength']) {
+          <div class="text-danger small">Minimum 3 znaki</div>
+        }
+      }
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Email</label>
+      <input class="form-control" type="email" formControlName="email">
+
+      @if (email?.invalid && email?.touched) {
+        <div class="text-danger small">Podaj poprawny email</div>
+      }
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Hasło</label>
+      <input class="form-control" type="password" formControlName="haslo">
+
+      @if (haslo?.invalid && haslo?.touched) {
+        <div class="text-danger small">Hasło min. 6 znaków</div>
+      }
+    </div>
+
+    <button class="btn btn-success" type="submit" [disabled]="reactiveForm.invalid">
+      Wyślij (Reactive Form)
+    </button>
+  </form>
+</div>
