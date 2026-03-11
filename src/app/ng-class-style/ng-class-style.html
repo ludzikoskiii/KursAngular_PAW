@@ -1,0 +1,71 @@
+<div class="container mt-4">
+  <h2>🎨 Lekcja 5 – ngClass & ngStyle (Dynamiczne CSS)</h2>
+  <hr>
+
+  <!-- ===== [ngClass] – dynamiczne dodawanie klas CSS ===== -->
+  <h5>[ngClass] – pojedyncza klasa warunkowo</h5>
+
+  <!-- Składnia: [ngClass]="'nazwKlasy': warunek" -->
+  <!-- Klasa 'text-success' zostanie dodana tylko gdy jestAktywny = true -->
+  <p [ngClass]="{'text-success fw-bold': jestAktywny, 'text-danger': !jestAktywny}">
+    Status: {{ jestAktywny ? 'AKTYWNY' : 'NIEAKTYWNY' }}
+  </p>
+
+  <button class="btn btn-outline-primary mb-3" (click)="przelaczAktywnosc()">
+    Przełącz aktywność
+  </button>
+
+  <hr>
+
+  <!-- ngClass z wieloma klasami naraz -->
+  <h5>[ngClass] – wiele klas jednocześnie</h5>
+  <div [ngClass]="{
+    'alert': true,
+    'alert-success': jestAktywny,
+    'alert-warning': !jestAktywny,
+    'fw-bold': jestAktywny
+  }">
+    Ten div ma dynamiczne klasy Bootstrap
+  </div>
+
+  <hr>
+
+  <!-- ===== [ngStyle] – dynamiczne style inline ===== -->
+  <h5>[ngStyle] – dynamiczne style</h5>
+
+  <!-- Składnia: [ngStyle]="{'właściwośćCSS': wartość}" -->
+  <p [ngStyle]="{
+    'color': kolorTekstu,
+    'font-size': rozmiarCzcionki + 'px',
+    'font-weight': jestAktywny ? 'bold' : 'normal'
+  }">
+    Ten tekst ma dynamiczne style inline
+  </p>
+
+  <!-- Zmieniamy kolor przez przyciski -->
+  <button class="btn btn-danger me-2" (click)="kolorTekstu = 'red'">🔴 Czerwony</button>
+  <button class="btn btn-primary me-2" (click)="kolorTekstu = 'blue'">🔵 Niebieski</button>
+  <button class="btn btn-success me-2" (click)="kolorTekstu = 'green'">🟢 Zielony</button>
+
+  <br><br>
+  <!-- Zmieniamy rozmiar czcionki -->
+  <button class="btn btn-sm btn-outline-secondary me-2" (click)="rozmiarCzcionki = rozmiarCzcionki - 2">A-</button>
+  <span>Rozmiar: {{ rozmiarCzcionki }}px</span>
+  <button class="btn btn-sm btn-outline-secondary ms-2" (click)="rozmiarCzcionki = rozmiarCzcionki + 2">A+</button>
+
+  <hr>
+
+  <!-- ===== Temat kolorystyczny – praktyczny przykład ===== -->
+  <h5>Praktyczny przykład – Zmiana tematu</h5>
+
+  <div [ngClass]="{
+    'bg-dark text-white p-3 rounded': wybranyTemat === 'ciemny',
+    'bg-light text-dark p-3 rounded border': wybranyTemat === 'jasny'
+  }">
+    Aktualny temat: <strong>{{ wybranyTemat }}</strong>
+  </div>
+
+  <br>
+  <button class="btn btn-dark me-2" (click)="wybranyTemat = 'ciemny'">🌙 Ciemny</button>
+  <button class="btn btn-light border" (click)="wybranyTemat = 'jasny'">☀️ Jasny</button>
+</div>
